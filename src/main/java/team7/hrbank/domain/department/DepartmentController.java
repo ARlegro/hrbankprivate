@@ -19,13 +19,13 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public void create(@RequestBody DepartmentRequestDTO createDTO) {
+    public void create(@Valid @RequestBody DepartmentRequestDTO createDTO) {
         log.info("createDTO = {}", createDTO);
         departmentService.create(createDTO);
     }
 
     @PostMapping("/test-batch")
-    public void createBatch(@RequestBody List<DepartmentRequestDTO> createDTO) {
+    public void createBatch(@Valid @RequestBody List<DepartmentRequestDTO> createDTO) {
         log.info("createDTO = {}", createDTO);
         for (DepartmentRequestDTO departmentRequestDTO : createDTO) {
             departmentService.create(departmentRequestDTO);

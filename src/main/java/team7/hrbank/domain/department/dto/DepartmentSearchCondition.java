@@ -1,36 +1,33 @@
 package team7.hrbank.domain.department.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.util.StringUtils;
 
 import static lombok.AccessLevel.*;
 
-@NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
 public class DepartmentSearchCondition {
     private static final String DEFAULT_SORTED_FIELD = "establishmentDate";
     private static final String DEFAULT_SORT_DIRECTION = "asc";
-    private static final int DEFAULT_SIZE = 10;
+    private static final Long DEFAULT_SIZE = 10L;
 
     // 여기다가 조건 및 get메서드 재정의해서 default값 정의
-    @Getter private String nameOrDescription;
+    @Getter private final String nameOrDescription;
     private Integer idAfter; // 이전 페이지 마지막 요소 id
-    @Getter private String cursor; // 커서 (다음 페이지 시작점)
+    @Getter private final String cursor; // 커서 (다음 페이지 시작점)
 
-    // 최소 최대 조건이 요구사항에 있엇나??
-    private Integer size; // 페이지 사이즈(기본값 10)
-    private String sortedField; // 정렬 필드(name or establishmentDate)
-    private String sortDirection; // 정렬 방향(asc or desc, 기본값은 asc)
+    private final Integer size; // 페이지 사이즈(기본값 10)
+    private final String sortedField; // 정렬 필드(name or establishmentDate)
+    private final String sortDirection; // 정렬 방향(asc or desc, 기본값은 asc)
 
     public Long getIdAfter() {
         return idAfter != null ? Long.valueOf(idAfter) : null;
     }
 
-    public int getSize() {
-        return size != null ? size : DEFAULT_SIZE; // 기본값 10
+    public Long getSize() {
+        return size != null ? Long.valueOf(size) : DEFAULT_SIZE; // 기본값 10
     }
 
     public String getSortedField() {
