@@ -22,14 +22,6 @@ import static team7.hrbank.domain.department.QDepartment.*;
 import static team7.hrbank.domain.employee.QEmployee.employee;
 
 
-// 남은 활용할 것 :     private Integer idAfter; // 이전 페이지 마지막 요소 id
-//    private String cursor; // 커서 (다음 페이지 시작점)
-// 일단 id : 20 으로 넘어오는거롤 찾기
-// 상황 2. 커서가 null인데 beforeLastId가 있는 경우 - 그냥 cursor가 잘못되면 null로 할지 아니면 idAftre로 쿼리한번더 나가게하고 찾을지 고민
-//        if (!StringUtils.hasText(cursorBeforeChange) && (beforeLastId > 0)) {
-//            fieldWhereCondition = getConditionByBeforeLastId(beforeLastId, sortedFieldName, sortDirection);
-//        }
-
 @Slf4j
 @RequiredArgsConstructor
 public class CustomDepartmentRepositoryImpl implements CustomDepartmentRepository {

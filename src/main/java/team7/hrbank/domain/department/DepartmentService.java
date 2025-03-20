@@ -46,7 +46,6 @@ public class DepartmentService {
     // 부서 목록 조회하는 메서드
     // search : 조건 기반 검색임이 들어나는 이름이라네요
     public DepartmentResponseDTO searchDepartments(DepartmentSearchCondition condition) {
-        //String cursor = "eyJpZCI6MjB9";
         return departmentRepository.findPagingAll1(condition);
     }
 
