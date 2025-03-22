@@ -30,7 +30,7 @@ public class CustomDepartmentRepositoryImpl implements CustomDepartmentRepositor
 
     public DepartmentResponseDTO findPagingAll1(DepartmentSearchCondition condition) {
         // 하나 더 가져오는 이유 : hasNext판단(로직 마지막에 버리고 추가)
-        int limitSize = condition.getSize() + 1;
+        long limitSize = condition.getSize() + 1;
 
         log.info("condition 인자 확인: {}", condition);
 
@@ -85,7 +85,7 @@ public class CustomDepartmentRepositoryImpl implements CustomDepartmentRepositor
                 contentDTOList,
                 encodedNextCursor,
                 nextIdAfter,
-                condition.getSize(),
+                Math.toIntExact(condition.getSize()),
                 totalCount,
                 hasNext
         );
@@ -126,9 +126,8 @@ public class CustomDepartmentRepositoryImpl implements CustomDepartmentRepositor
     private BooleanExpression nameOrDescriptionLike(String nameOrDescription) {
         //{이름 또는 설명}는 부분 일치 조건입니다.
         if (StringUtils.hasText(nameOrDescription)) {
-            return department.name.containsIgnoreCase(nameOrDescription);
-        } else if (StringUtils.hasText(nameOrDescription)) {
-            return department.description.containsIgnoreCase(nameOrDescription);
+            return department.name.containsIgnoreCase(nameOrDescription)
+                    .or(department.description.containsIgnoreCase(nameOrDescription));
         }
         return null;
     }
